@@ -1,0 +1,258 @@
+:hover, :active, :focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+html, body {
+    height:100%;
+    width:100%;
+    margin:0px;
+    padding:0px;                    
+    text-shadow: -1px 1px black,
+        -1px -1px black,
+        2px 2px black,
+        1px -1px black;
+    color: white;
+    background-color:#1e1e1e;
+    font: 1em sans-serif;
+    font-family: sans-serif, "Material Icons";
+    transition: all .5s ease-in-out;
+    overflow: overlay;
+}
+html.light, body.light {
+    background-color:white;
+}
+#header {
+    padding-top: 10px;
+    width:80%;
+    margin: auto;
+    justify-self: center;
+}
+#SelfCards {
+    display: flex;
+    margin: auto;
+    justify-self: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+#OtherPlayers {
+    border-collapse: collapse;
+    width:100%;
+    table-layout: fixed;
+    margin:auto;
+}
+#OtherPlayers tr, th, td {
+    padding:5px;
+}
+#OtherPlayers td {
+    text-align: center;
+}
+#OtherPlayers th {
+    position: sticky;
+    top:0;
+}
+td:first-child {
+    border-top-left-radius: 5px; 
+    border-bottom-left-radius: 5px;
+}
+td:last-child {
+    border-bottom-right-radius: 5px; 
+    border-top-right-radius: 5px; 
+}
+.playerClass {
+    flex: 40%;
+    border-radius: 5px;
+    padding:5px;
+    text-align: center;
+    margin:5px;
+    background-color: #5A5A5A;
+    transition: all .5s;
+}
+.otherPlayerClass {
+    border-radius: 5px;
+    padding:5px;
+    transition: all .5s;
+}
+.playerClass.light {
+    background-color: #AAAAAA;
+}
+.playerClass.self {
+    flex: 100%;
+    height:auto;
+}
+.active {
+    background-color: #87C54088;
+}
+@keyframes selfBlink {
+    from {background-color: #87C540;}
+    to {background-color: #5A5A5A;}
+}
+@keyframes selfBlinkLight {
+    from {background-color: #87C540;}
+    to {background-color: #AAAAAA;}
+}
+.playerClass.active.self {
+    animation: selfBlink 2s ease-in-out infinite alternate-reverse;
+}
+.playerClass.active.self.light {
+    animation: selfBlinkLight 2s ease-in-out infinite alternate-reverse;
+}
+@keyframes deckHighlighter {
+    from { box-shadow: 0px 0px 0px 0px yellow; transform: scale(1);}
+    to { box-shadow: 0px 0px 5px 5px yellow; transform: scale(1.2);}
+}
+.deckHighlight {
+    border-radius: 8%;
+    animation: deckHighlighter 1.5s ease-in-out infinite alternate-reverse;
+}
+@keyframes unoCall {
+    from {background-color: #FFFF0088;}
+    to {background-color: #5A5A5A22;}
+}
+.unoCall {
+    opacity: 1;
+    animation: unoCall .5s ease-in-out infinite alternate-reverse;
+    border-radius: 5px;
+    transition: all .5s;
+    cursor: pointer;
+}
+.unoCall.hidden, .unoCall.hidden:hover {
+    opacity: 0;
+    margin-bottom: -28px;
+    border-radius: 0px;
+    cursor: default;
+}
+.next {
+    box-shadow: 0px 0px 2px 2px blue;
+}
+.playerClass:hover {
+    opacity: 1;
+}
+.playerHand {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+    align-content: center;
+    margin: 20px 0px;
+}
+.card {
+    height: auto;
+    width: 13%;
+    opacity: 1;
+    transition: all .25s, visibility 0s;
+    object-fit:cover;
+    cursor: pointer;
+}
+.card[disabled=true] {
+    filter: brightness(0.33);
+    cursor: not-allowed;
+}
+.card[disabled=true].light {
+    filter: brightness(0.6);
+}
+.card:hover {
+    transform: scale(1.2);
+}
+#inputValue, #themeSelector{
+    flex:90%;
+    border: none;
+    background-color: #5A5A5A;
+}
+#inputValue.light, #themeSelector.light{
+    background-color: #AAAAAA;
+}
+input, button, input::placeholder, #themeSelector   {
+    color:white;
+    padding:5px;
+}
+input.light, button.light, input.light::placeholder, #themeSelector.light {
+    color:black;
+}
+#enterButton, #exitButton{
+    font-weight: bold;
+    flex: 15%;
+    border: none;
+    background-color: #868686;
+    cursor: pointer;
+}
+#enterButton.light, #exitButton.light{
+    background-color: #939393;
+}
+#exitButton {
+    width: -webkit-fill-available;
+    width: -moz-available;
+}
+#inputMenu, #staticCards, #themeMenu {
+    flex: 100%;
+    display:flex;
+    padding:5px;
+}
+.overlay_text {
+    position:absolute;
+    font-weight: bold;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border:2px;
+    border-radius:5px;
+    background-color: #5A5A5A;
+    opacity: 100%;
+    padding:5px;
+    text-align: center;
+}
+.overlay_text.light {
+    background-color: #AAAAAA;
+}
+.overlay_text.left {
+    left:0;
+    transform: translate(-150%,-50%);
+}
+.overlay_text.right{
+    left:100%;
+    transform: translate(50%,-50%);
+}
+#content {
+    width:90%;
+    margin:auto;
+    transition: width .5s;
+}
+@media (min-width: 600px) {
+    #content {
+        width:60%;
+    }
+}
+@media (min-width: 1000px) {
+    #content {
+        width:40%;
+    }
+    .card {
+        width: 10%;
+    }
+    .playerClass {
+        flex: 20%;
+    }
+}
+.username {
+    overflow-wrap: anywhere;
+}
+.spin {
+    animation: spin .5s linear infinite;
+}
+.material-icons {
+    font-size: 1em;
+}
+@keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #00000000; 
+}
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

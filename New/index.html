@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            @media (max-width: 600px) {
+                div.login > div {
+                    grid-column:1/4 !important  ;
+                }
+                .content {
+                    grid-template-columns: auto !important;
+                    grid-template-rows: repeat(auto-fit, minmax(10px, max-content)) !important;
+                }
+                .card {
+                    zoom:10% !important
+                }
+                .cardndeck {
+                    grid-column:1 !important;
+                    grid-row: 2 !important;
+                    grid-template-rows: unset !important;
+                    grid-template-columns: auto auto !important;
+                    justify-content: space-evenly !important;
+                }
+                .cardndeck > .card {
+                    margin-bottom:45% !important;
+                    margin-top:10% !important;
+                }
+                .cardndeck > .card:nth-child(1):after {
+                    bottom:0 !important;
+                    transform: translateY(150%) !important;
+                }
+                .allPlayers {
+                    grid-column:1 !important;
+                    grid-row: 3 !important;
+                    flex-direction: column !important;
+                    flex-wrap:nowrap !important;
+                    justify-content: flex-start !important;
+                }
+                .chat {
+                    grid-column:1 !important;
+                    grid-row:4 !important;
+                }
+                .cards {
+                    max-width:100% !important;
+                }
+            }
+            html, body {
+                background-color:#1e1e1e;
+                height:100%;
+                width:100%;
+                margin:0px;
+                padding:0px;
+                font: 1em sans-serif;
+                overflow-x:hidden;
+            }
+            .card {
+                display:inline-block;
+                width:486px;
+                height:759px;
+                zoom:20%;
+                background: url("../Cards.png");
+                background-position-x: 0;
+                background-position-x: 0;
+                transition: all .25s;
+            }
+            .cardWrapper > .card {
+                transform: scale(1);
+            }
+            .cardWrapper:hover > .card{
+                max-width: unset;
+                transform:translateY(-25%);
+            }
+            .cardWrapper:last-child{
+                width:calc(486px * .2);
+            }
+            .cardWrapper:hover {
+                z-index: 0;
+            }
+            div.login {
+                background-color: #000000bb;
+                position:absolute;
+                left:0;
+                right:0;
+                top:0;
+                bottom:0;
+                display:grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                backdrop-filter: blur(10px);
+                z-index:1;
+            }
+            div.login > div {
+                border-radius:10px;
+                display:grid;
+                grid-column: 2;
+                grid-row:2;
+                grid-template-columns: 1fr auto;
+                grid-template-rows: auto 1fr 1fr;
+                grid-gap:5px 2.5px;
+                width:100%;
+                box-sizing: border-box;
+                margin:auto;
+                padding:50px 10px;
+                background-color:#ffffff44;
+                opacity:0;
+                animation: .5s ease 1s forwards load;
+            }
+            div.login > div > input {
+                border-radius:5px;
+                padding:5px;
+                border:none;
+                background-color:#ffffff44;
+                color:white;
+            }
+            div.login > div > input::placeholder {
+                color:darkgrey;
+            }
+            div.login > div > input[type=url] {
+                grid-column: 1;
+                grid-row:2;
+                width:-webkit-fill-available;
+            }
+            div.login > div > input[type=text] {
+                grid-column: 1/3;
+                grid-row:3;
+                width:-webkit-fill-available;
+            }
+            div.login > div > input[type=button] {
+                grid-column: 2;
+                grid-row:2;
+                cursor:pointer;
+                width:-webkit-fill-available;
+            }
+            img.logo {
+                zoom:10%;
+                margin:auto;
+                margin-bottom:50px;
+                grid-column: 1/3;
+                grid-row:1;
+                background: url("./LOGO.png")
+            }
+            .content {
+                height:100%;
+                display:grid;
+                grid-template-columns: 1fr 3fr 3fr;
+                grid-template-rows: auto 1fr 1fr 1fr;
+            }
+            .cardndeck {
+                display: grid;
+                grid-template-rows: auto auto;
+                grid-template-columns: unset;
+                justify-content: center;
+                align-content: space-evenly;
+                grid-column: 1;
+                grid-row: 1/5;
+            }
+            .cardndeck > .card {
+                margin:0px 10px;
+            }
+            .cardndeck > .card::after {
+                position: absolute;
+                left: 0;
+                right: 0;
+                text-align: center;
+                width: fit-content;
+                margin: auto;
+                font: 5em sans-serif;
+                color: white;
+                background-color: #00000044;
+                padding: 0px 10px;
+                border-radius: 5px;
+            }
+            .cardndeck > .card:nth-child(1) {
+                border: 5px red solid;
+                position:relative;
+            }
+            .cardndeck > .card:nth-child(1):after {
+                content:"Last Played";
+                transform: translateY(-150%);
+            }
+            .cardndeck > .card:nth-child(2) {
+                border: 5px blue solid;
+                position:relative;
+            }
+            .cardndeck > .card:nth-child(2):after {
+                bottom:0;
+                transform: translateY(150%);
+                content:"Deck";
+            }
+            .allPlayers {
+                grid-column: 2/4;
+                grid-row: 1/4;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-content: flex-start;
+            }
+            .chat {
+                grid-column:2/4;
+                grid-row:4;
+            }
+            .cards {
+                display: grid;
+                grid-template-rows: auto 1fr;
+                background-color: #ffffff44;
+                border-radius: 5px;
+                margin: 5px;
+                flex: 1;
+                min-width:20vw;
+                max-width:50%;
+                padding:5px;
+            }
+            .cards > p {
+                font: 2em sans-serif;
+                color: white;
+                background-color: #ffffff44;
+                border-radius: 5px;
+                padding: 5px;
+                grid-row: 1;
+                margin: 5px;
+                text-align: center;
+            }
+            .cards > div > div:first-child{
+                display:grid;
+                grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+                justify-content:space-evenly; 
+                border-radius: 5px;
+                padding:5px;
+            }
+            .cards > div.holder > div:nth-child(2) {
+                color:white;
+                font-size:2em;
+                text-align:right;
+                align-self:center;
+                margin-right:10px;
+            }
+            .cards > div {
+                display:grid;
+                grid-template-columns: 2fr 1fr;
+            }
+            div.content > * {
+                background-color: #ffffff44;
+                border-radius: 10px;
+                margin: 5px;
+                padding: 5px;
+            }
+            @keyframes load {
+                0% {
+                    opacity:0;
+                    transform:scale(.5);
+                }
+                100% {
+                    opacity:1;
+                    transform:scale(1);
+                }
+            }
+        </style>
+        <script>
+            class Player {
+                static list = [];
+                static self;
+                constructor(name,uuid,cards) {
+                    this.name = name;
+                    this.self = typeof(cards) == "object";
+                    this.uuid = uuid;
+                    this.cards = cards;
+                    this.element = document.createElement("div");
+                    this.element.classList.add("cards");
+                    this.element.innerHTML = `<p></p><div class="holder"><div></div><div></div></div>`
+                    this.element.querySelectorAll("p")[0].innerHTML = this.name;
+                    if(this.self) {
+                        Player.self = this;
+                        for(let card of this.cards) {
+                            let cardWrapper = document.createElement("div");
+                            cardWrapper.classList.add("cardWrapper");
+                            cardWrapper.appendChild(new Card(card.color, card.figure, card.uuid).element)
+                            this.element.querySelectorAll("div")[0].querySelectorAll("div")[0].appendChild(cardWrapper)
+                        }
+                        this.element.querySelectorAll("div.holder > div")[1].innerHTML = `x${this.cards.length}`;
+                    } else {
+                        for(let i = 0; i < this.cards; i ++) {
+                            let cardWrapper = document.createElement("div");
+                            cardWrapper.classList.add("cardWrapper");
+                            cardWrapper.appendChild(new Card("black",1).element);
+                            this.element.querySelectorAll("div")[0].querySelectorAll("div")[0].appendChild(cardWrapper)
+                        }
+                        this.element.querySelectorAll("div.holder > div")[1].innerHTML = `x${this.cards}`;
+                    }
+                    Player.list.push(this);
+                    document.querySelectorAll(".allPlayers")[0].appendChild(this.element);
+                }
+                disconnect() {
+                    document.querySelectorAll(".allPlayers")[0].removeChild(this.element);
+                    console.log(`${this.name} disconnected`)
+                    Player.list.splice(Player.list.indexOf(this),1);
+                    return true;
+                }
+            }
+            class Card {
+                static colors = {
+                    "red": 0,
+                    "yellow": 759,
+                    "green": 1518,
+                    "blue": 2277,
+                    "black": 3034
+                }
+                static figures = {
+                    "skip": 4860,
+                    "reverse": 5346,
+                    "+2": 5832,
+                    "wild": 6318,
+                    "wild+4": 6803
+                }
+                constructor(color="black", figure="1", uuid) {
+                    color = color.toString().toLowerCase();
+                    figure = figure.toString().toLowerCase()
+                    this.color = color;
+                    this.uuid = uuid;
+                    this.figure = figure;
+                    this.position = {
+                        x:0,
+                        y:0
+                    }
+                    if(Object.keys(Card.colors).includes(color)) {
+                        this.position.y = `-${Card.colors[color]}px`;
+                    }
+                    if(Object.keys(Card.figures).includes(figure)) {
+                        this.position.x = `-${Card.figures[figure]}px`;
+                    } else if(!isNaN(Number(figure)) && figure >= 0 && figure <= 9) {
+                        if(color != "black" || (color == "black" && figure >= 0 && figure <= 1)) {
+                            this.position.x = `-${figure * 486}px`;
+                        }
+                    }
+                    this.element = document.createElement("div");
+                    this.element.classList.add("card");
+                    this.element.setAttribute("uuid",this.uuid)
+                    this.element.style.backgroundPositionX = this.position.x;
+                    this.element.style.backgroundPositionY = this.position.y;
+                }
+            }
+            
+            var connection;
+            var lastPlayed = new Card();
+            var deck = new Card();
+
+            function connect(url) {
+                connection = new WebSocket(url);
+                connection.event = (event,data) => {
+                    connection.send(JSON.stringify({event:event,data:data}))
+                }
+                connection.onopen = (ev) =>{
+                    connection.event("player",{name:document.querySelectorAll("input[placeholder=Username]")[0].value});
+                    connection.onclose = (exit) => {
+                        for(let i = Player.list.length - 1; i >= 0; i--) {
+                            Player.list[i].disconnect();
+                        }
+                        Player.self = undefined;
+                        document.querySelectorAll(".login")[0].style.display = "grid" 
+                        document.querySelectorAll(".login > div")[0].animate([{"transform":"translateY(0%)",opacity:1}],{duration:1000,easing:"ease",fill:"forwards"})
+                        document.querySelectorAll(".login")[0].animate([{opacity:1}],{duration:1000,easing:"ease",fill:"forwards"})
+                        console.log(exit);
+                    }
+                    connection.onmessage = (msg) => {
+                        try {
+                            msg = JSON.parse(msg.data);
+                            action = msg.event
+                            data = msg.data;
+                        } catch(e) {
+                            action = "nonJSON"
+                            data = {data:msg.data};
+                        }
+                        var actions = {
+                            player:() =>{
+                                console.log(data)
+                                if(!data.err) {
+                                    console.log("success")
+                                    for(let player of data.players) {
+                                        new Player(player.name,player.uuid,player.cards);
+                                    }
+                                    document.querySelectorAll(".login > div")[0].animate([{"transform":"translateY(-300%)",opacity:0}],{duration:1000,easing:"ease",fill:"forwards"})
+                                    document.querySelectorAll(".login")[0].animate([{opacity:0}],{duration:1000,easing:"ease",fill:"forwards"}).onfinish = function(){this.effect.target.style.display="none"}
+                                } else {
+                                    alert(`Error! ${data.err}`)
+                                }
+                            },
+                            playCard:() => {
+                                console.log("//todo: finish")
+                            },
+                            disconnect:() => {
+                                for(player of Player.list) {
+                                    if(player.uuid == data.uuid) {
+                                        player.disconnect();
+                                    }
+                                }
+                            },
+                            nonJSON:()=>{
+                                console.error(`Failed to parse ${data}`,msg);
+                            },
+                            invalidAction:() => {
+                                console.error(`Invalid action ${msg}`);
+                            }
+                        }
+                        if(Object.keys(actions).includes(action)) {
+                            try{
+                                actions[action]();
+                            } catch(e) {
+                                console.error(e)
+                            }
+                        } else {
+                            action["invalidAction"]();
+                        }
+                    }
+                }
+                connection.onclose = (exit) => {
+                    document.querySelectorAll(".login > div")[0].animate([{"backgroundColor":"#ffffff44"},{"backgroundColor":"#ff000088"}],{duration:200,easing:"linear",iterations:4,direction:"alternate"})
+                }
+            }
+            window.addEventListener("load",()=> {
+                document.querySelectorAll(".cardndeck")[0].appendChild(lastPlayed.element);
+                document.querySelectorAll(".cardndeck")[0].appendChild(deck.element);
+                document.querySelectorAll("input[type=url]")[0].value = `wss://${window.location.host}:860`
+                document.querySelectorAll("input[value=Connect]")[0].addEventListener("click",()=>{
+                    connect(document.querySelectorAll("input[type=url]")[0].value);
+                })
+                document.querySelectorAll("input[placeholder=Username]")[0].addEventListener("keydown",(ev)=>{
+                    if(ev.key == "Enter") {
+                        connect(document.querySelectorAll("input[type=url]")[0].value);
+                    }
+                })
+            });
+        </script>
+    </head>
+    <body>
+        <div class="login">
+            <div>
+                <img class="logo" src="./LOGO.png">
+                <input type="url" placeholder="Server URL">
+                <input type="button" value="Connect">
+                <input type="text" placeholder="Username">
+            </div>
+        </div>
+        <div class="content">
+            <div class="cardndeck"></div>
+            <div class="allPlayers"></div>
+            <div class="chat"></div>
+        </div>
+    </body>
+</html>

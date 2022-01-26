@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta charset="UTF-8">
+        <script src="/consoleAd.js"></script>
+        
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            
+            gtag('config', 'UA-51765657-6');
+            </script>
+        <link rel="icon" href="./Cards/unoFavicon-512.webp">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Uno Online, Uno Classic Online, Uno Classic, Uno Card Game">
+        <link rel="manifest" href="./Uno.webmanifest">
+        <title>Uno!</title> 
+        <link rel="apple-touch-icon" href="./Cards/maskable_icon.webp">
+        <meta name="theme-color" content="#1e1e1e">
+        <meta name=description content="Classic Uno on The Web!">
+        <link rel="stylesheet" href="./Style.css">
+        <script src="./Client.js"> </script>
+    </head>
+    <body>
+        <div id=content>
+            <div id="header">
+                <img src="./Cards/LOGO.webp" alt="Uno Logo" id="logo" style="display:block; width: 20%; max-width: 200px; margin-top:10px; margin-bottom: 10px; margin-left:auto; margin-right: auto;">
+            </div>
+            <div class="playerClass" id="themeMenu">
+                <select id="themeSelector">Connect<i class="material-icons spin" style="opacity:0;">loop</i>
+                    <option value="Dark">Dark</option>
+                    <option value="Light">Light</option>
+                </select>
+            </div>
+            <div class="playerClass" id="inputMenu">
+                <input type="text" id="inputValue" max-length=16 aria-label="Url" placeholder="Url"><button id="enterButton">Login</button>
+            </div>
+            <div class="playerClass" id="exitMenu" style="display: none">
+                <input id="exitButton" type="button" value="Logout">
+            </div>
+            <div class="playerClass" style="justify-content: center;" id="staticCards">
+                <div class="card" style="position: relative; margin-right:5px;">
+                    <img src="./Cards/BACK.webp" alt="Last Card Played" id="lastCard" style="max-width:100%; max-height:100px;">
+                    <a class="overlay_text left">Last Card</a>
+                </div>
+                <div class="card" style="position: relative; margin-left:5px;" id="cardDeck" title="Click to draw cards">
+                    <img src="./Cards/BACK.webp" alt="Deck" id="deckCard" style="max-width:100%; max-height:100px;">
+                    <a class="overlay_text right">Deck</a>
+                </div>
+            </div>
+            <div id="PlayerContainer">
+                <div class="playerClass self active" id="wildSelector" style="display:none;">
+                    <div class="playerHand">
+                        <img id="redWild" src="./Cards/RED_WILD.webp" class="card">
+                        <img id="greenWild" src="./Cards/GREEN_WILD.webp" class="card">
+                        <img id="blueWild" src="./Cards/BLUE_WILD.webp" class="card">
+                        <img id="yellowWild" src="./Cards/YELLOW_WILD.webp" class="card">
+                    </div>
+                </div>
+                <div id="SelfCards">
+                </div>
+                <div class="playerClass">
+                    <table id="OtherPlayers" class="playerClass">
+                        <thead>
+                            <tr>
+                                <th colspan="3">Players</th>
+                            </tr>
+                            <tr>
+                                <th colspan="1">Name</th>
+                                <th colspan="1">Call Uno</th>
+                                <th colspan="1">Cards</th>
+                            </tr>
+                        </thead>
+                        <tbody id="output">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="playerClass">Game content and materials are trademarks and copyrights of their respective publisher and its licensors. All rights reserved.</div>
+        </div>
+    </body>
+</html>

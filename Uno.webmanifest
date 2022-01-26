@@ -1,0 +1,60 @@
+{
+    "name": "Uno",
+    "short_name": "Uno",
+    "description": "Simple Web Uno",
+    "icons": [
+        {
+            "src": "/Uno/Cards/unoFavicon-32.webp",
+            "sizes": "32x32",
+            "type": "image/webp"
+        },
+        {
+            "src": "/Uno/Cards/unoFavicon-192.webp",
+            "sizes": "192x192",
+            "type": "image/webp"
+        },
+        {
+            "src": "/Uno/Cards/unoFavicon-512.webp",
+            "sizes": "512x512",
+            "type": "image/webp"
+        },
+        {
+            "src": "/Uno/Cards/maskable_icon.webp",
+            "sizes": "512x512",
+            "type": "image/webp",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/Uno/PNG/unoFavicon-32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/Uno/PNG/unoFavicon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/Uno/PNG/unoFavicon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/Uno/PNG/maskable_icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": "/Uno/index.html",
+    "display": "fullscreen",
+    "theme_color": "#1e1e1e",
+    "background_color": "#1e1e1e",
+    "orientation": "portrait",
+    "shortcuts": [
+        {
+            "name": "Play Uno",
+            "url": "/Uno/index.html"
+        }
+    ]
+}
