@@ -337,12 +337,27 @@
                     this.element.setAttribute("uuid",this.uuid)
                     this.element.style.backgroundPositionX = this.position.x;
                     this.element.style.backgroundPositionY = this.position.y;
+                    this.element.addEventListener("click",function () {
+                        console.log(this);
+                    })
                 }
             }
             
             var connection;
             var lastPlayed = new Card();
             var deck = new Card();
+
+            class ServerEvent {
+                constructor() {
+                }
+                event = this.constructor.name;
+                data = {};
+            }
+            class PlayerEvent extends ServerEvent {
+                constructor() {
+                    super();
+                }
+            }
 
             function connect(url) {
                 connection = new WebSocket(url);
