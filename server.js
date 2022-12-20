@@ -36,8 +36,8 @@ process.stdin.on("data", data => {
     }
 })
 const server = SecureSocket ? https.createServer({
-    cert: fs.readFileSync('/etc/letsencrypt/live/alphapuggle.dev/cert.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/alphapuggle.dev/privkey.pem')
+    cert: fs.readFileSync('/etc/letsencrypt/live/alphapuggle.dev/cert.pem'), // Use your cert here to run with SSL
+    key: fs.readFileSync('/etc/letsencrypt/live/alphapuggle.dev/privkey.pem') // Use your key here to run with SSL
 }) : null;
 wss = new WebSocket.Server(SecureSocket ? {server} : { port: 860 })
 wss.broadcast = function (data, sender) {
@@ -249,7 +249,7 @@ Player.cards = {
 class Bot {
     constructor() {
         Bot.bots.push(this)
-        this.connection = new WebSocket(`wss://${os.networkInterfaces()[Object.keys(os.networkInterfaces()).filter(name => name.substring(0,1) == "e")[0]][0].address}:860`, {rejectUnauthorized: false});
+        this.connection = new WebSocket(`${SecureSocket ? "wss://" : "ws://"}localhost:860`, {rejectUnauthorized: false});
         this.name = names[Math.floor(Math.random() * names.length)]
         this.callUnoOn = "clear"
         this.remove = () => {
