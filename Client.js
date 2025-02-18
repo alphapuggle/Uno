@@ -403,7 +403,7 @@ function openConnection(url) {
 window.onload = () => {
     $("#inputValue").placeholder = "Url";
     $("#inputValue").maxLength = 9999999;
-    $("#inputValue").value = `${window.location.host}:860`;
+    $("#inputValue").value = `${window.location.host}:8600`;
     $("#inputValue").onkeydown = (event) => {
         if(event.key == "Enter") {
             $("#enterButton").click();

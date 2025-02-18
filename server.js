@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const os = require("os");
 const { WSAEWOULDBLOCK } = require('constants');
 const { v4: uuidv4} = require("uuid");
-const port = 860;
+const port = 8600;
 const SecureSocket = true;
 var minimumPlayers = 3;
 var wss;
