@@ -1,0 +1,9 @@
+services:
+  uno:
+    build: .
+    restart: always
+    container_name: uno
+    ports:
+      - 8600:8600
+    environment:
+      MIN_PLAYERS: 3
